@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Эпоха Големов</title>
+<link rel="stylesheet" href="css/style.css?v=52762b9-1793111930">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- HUD -->
+<div id="hud">
+  <div id="topLeft">
+    <div id="quest" class="panel small"></div>
+  </div>
+  <div id="topRight">
+    <div class="panel small row">
+      <span id="clock">00:00</span>
+      <span id="pauseInd" class="hidden">⏸ ПАУЗА</span>
+      <button data-act="save" title="Сохранить (F5)">💾</button>
+      <button data-act="menu" title="Меню (Esc)">☰</button>
+    </div>
+    <canvas id="minimap" width="180" height="180" class="panel"></canvas>
+    <div id="threats" class="panel small"></div>
+  </div>
+  <div id="bottomLeft" class="panel small">
+    <div class="bar"><div id="hpFill" class="fill hp"></div><span id="hpText"></span></div>
+    <div id="gear"></div>
+    <div id="craftQ"></div>
+  </div>
+  <div id="log"></div>
+  <div id="hotbar" class="panel"></div>
+  <div id="hint"></div>
+  <div id="tooltip" class="hidden"></div>
+</div>
+
+<div id="pauseOverlay" class="hidden"><div class="panel"><h1 style="font-size:30px">Пауза</h1>
+  <div class="col"><button data-act="unpause">Продолжить (Пробел)</button><button data-act="settings">Настройки</button><button data-act="save">Сохранить</button></div></div></div>
+
+<!-- окна -->
+<div id="windows"></div>
+
+<div id="startScreen" class="overlay">
+  <div class="panel big center">
+    <h1>Эпоха Големов</h1>
+    <p class="sub">Изгнанный Анимансер. Ни капли боевой магии — только разум, механика и оживлённая материя.</p>
+    <div class="col">
+      <button id="btnContinue" class="hidden">Продолжить</button>
+      <button id="btnNew">Новая игра</button>
+      <button id="btnLoadFile">Загрузить из файла</button>
+      <button id="btnJoin">🌐 Присоединиться к другу</button>
+      <button id="btnDemo">🧪 Полигон: рабочие и еда</button>
+      <input type="file" id="fileInput" accept=".json" class="hidden">
+    </div>
+    <p class="keys">WASD — ходьба · ЛКМ — добыча / постройка / атака врага · ПКМ — разобрать · C — крафт · E — инвентарь · 1–0 — панель быстрого доступа · Tab — сменить оружие (3 слота) · T — исследования · Y — рабочие · R — повернуть · Пробел — пауза · M — карта · H — справка</p>
+  </div>
+</div>
+
+<script src="js/version.js?v=52762b9-1793111930"></script>
+<script src="js/util.js?v=52762b9-1793111930"></script>
+<script src="js/data.js?v=52762b9-1793111930"></script>
+<script src="js/admin.js?v=52762b9-1793111930"></script>
+<script src="js/sprites.js?v=52762b9-1793111930"></script>
+<script src="js/gfx.js?v=52762b9-1793111930"></script>
+<script src="js/art.js?v=52762b9-1793111930"></script>
+<script src="js/art_camps.js?v=52762b9-1793111930"></script>
+<script src="assets/sprites/sprites.js?v=52762b9-1793111930"></script>
+<script src="js/sprites3d.js?v=52762b9-1793111930"></script>
+<script src="js/variants.js?v=52762b9-1793111930"></script>
+<script src="assets/manifest.js?v=52762b9-1793111930"></script>
+<script src="js/assets.js?v=52762b9-1793111930"></script>
+<script src="js/world.js?v=52762b9-1793111930"></script>
+<script src="js/ground.js?v=52762b9-1793111930"></script>
+<script src="js/inventory.js?v=52762b9-1793111930"></script>
+<script src="js/buildings.js?v=52762b9-1793111930"></script>
+<script src="js/logistics.js?v=52762b9-1793111930"></script>
+<script src="js/power.js?v=52762b9-1793111930"></script>
+<script src="js/golems.js?v=52762b9-1793111930"></script>
+<script src="js/player.js?v=52762b9-1793111930"></script>
+<script src="js/combat.js?v=52762b9-1793111930"></script>
+<script src="js/factions.js?v=52762b9-1793111930"></script>
+<script src="js/workers.js?v=52762b9-1793111930"></script>
+<script src="js/research.js?v=52762b9-1793111930"></script>
+<script src="js/audio.js?v=52762b9-1793111930"></script>
+<script src="js/music.js?v=52762b9-1793111930"></script>
+<script src="js/render.js?v=52762b9-1793111930"></script>
+<script src="js/ui.js?v=52762b9-1793111930"></script>
+<script src="js/blueprint.js?v=52762b9-1793111930"></script>
+<script src="js/stats.js?v=52762b9-1793111930"></script>
+<script src="js/cheats.js?v=52762b9-1793111930"></script>
+<script src="js/admin_ui.js?v=52762b9-1793111930"></script>
+<script src="js/tutorial.js?v=52762b9-1793111930"></script>
+<script src="js/save.js?v=52762b9-1793111930"></script>
+<script src="js/daynight.js?v=52762b9-1793111930"></script>
+<script src="js/caravans.js?v=52762b9-1793111930"></script>
+<script src="js/guards.js?v=52762b9-1793111930"></script>
+<script src="js/construction.js?v=52762b9-1793111930"></script>
+<script src="js/features.js?v=52762b9-1793111930"></script>
+<script src="js/dungeons.js?v=52762b9-1793111930"></script>
+<script src="js/wildlife.js?v=52762b9-1793111930"></script>
+<script src="js/clouds.js?v=52762b9-1793111930"></script>
+<script src="js/demo.js?v=52762b9-1793111930"></script>
+<script src="js/intro.js?v=52762b9-1793111930"></script>
+<script src="js/main.js?v=52762b9-1793111930"></script>
+<script src="js/net.js?v=52762b9-1793111930"></script>
+</body>
+</html>
